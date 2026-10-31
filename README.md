@@ -5,8 +5,6 @@
 **Local-first, deterministic source-code inspection and ZIP comparison.** Codebase Inspector analyzes archive contents without AI or an external translation/analysis API. It includes technology inventories, structural metrics, WordPress and Node.js integration analysis, static review signals, documentation exports, and two comparison modes.
 
 **Version:** 0.8.1  
-**Project website and documentation:** https://jocire.github.io/codebase-inspector/  
-**Source repository:** https://github.com/jocire/codebase-inspector
 
 > **GitHub Pages hosts documentation only.** The application requires its Node.js API to analyze ZIP archives. To use the inspector, run it locally or deploy the Node.js service separately. Do not upload confidential source archives to an untrusted hosted instance.
 

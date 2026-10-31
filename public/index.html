@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Codebase Inspector</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div>
+    <h1>Codebase Inspector</h1>
+    <p>Deterministic ZIP analysis and version comparison — no AI required.</p>
+  </div>
+  <div class="tabs">
+    <button class="tab active" data-mode="analyze">Analyze</button>
+    <button class="tab" data-mode="compare">Compare</button>
+  </div>
+</header>
+<main>
+  <section id="analyzeView">
+    <div class="drop" id="singleDrop" data-input="single" tabindex="0" role="button" aria-label="Drop a ZIP archive here or choose one to upload">
+      <input id="single" class="file-input" type="file" accept=".zip,application/zip" tabindex="-1">
+      <strong>Drop a ZIP here</strong>
+      <span>or upload a codebase archive</span>
+      <button type="button" class="upload-btn" data-target="single">Upload ZIP</button>
+      <div class="file-selection" id="singleSelection" hidden></div>
+    </div>
+    <button id="analyzeBtn" type="button" disabled>Analyze codebase</button>
+  </section>
+
+  <section id="compareView" hidden>
+    <div class="compare-type-panel">
+      <strong>What are you comparing?</strong>
+      <label><input type="radio" name="comparisonType" value="versions" checked> Same codebase in different states <span>Version/revision comparison with added, removed, modified files and inline diffs.</span></label>
+      <label><input type="radio" name="comparisonType" value="codebases"> Two different codebases <span>Side-by-side architecture, technology, dependency and overlap comparison without misleading version-diff semantics.</span></label>
+    </div>
+    <div class="compare-grid">
+      <div class="drop" id="beforeDrop" data-input="before" tabindex="0" role="button" aria-label="Drop the earlier ZIP archive here or choose one to upload">
+        <input id="before" class="file-input" type="file" accept=".zip,application/zip" tabindex="-1">
+        <strong id="beforeTitle">Earlier version</strong>
+        <span>Drop ZIP or upload archive</span>
+        <button type="button" class="upload-btn" data-target="before">Upload ZIP</button>
+        <div class="file-selection" id="beforeSelection" hidden></div>
+      </div>
+      <div class="drop" id="afterDrop" data-input="after" tabindex="0" role="button" aria-label="Drop the newer ZIP archive here or choose one to upload">
+        <input id="after" class="file-input" type="file" accept=".zip,application/zip" tabindex="-1">
+        <strong id="afterTitle">Newer version</strong>
+        <span>Drop ZIP or upload archive</span>
+        <button type="button" class="upload-btn" data-target="after">Upload ZIP</button>
+        <div class="file-selection" id="afterSelection" hidden></div>
+      </div>
+    </div>
+    <button id="compareBtn" type="button" disabled>Compare versions</button>
+  </section>
+
+  <section id="analysisStatus" class="analysis-status" hidden aria-live="polite">
+    <div class="status-head"><strong id="statusTitle">Ready</strong><span id="statusElapsed"></span></div>
+    <div class="progress-track"><div id="progressFill" class="progress-fill"></div></div>
+    <div class="status-meta"><span id="statusStage"></span><span id="statusEstimate"></span></div>
+    <div id="statusDetails" class="status-details"></div>
+  </section>
+  <div id="status" aria-live="polite"></div>
+  <section id="exportBar" class="export-bar" hidden>
+    <div><strong>Export report</strong><span>Share the JSON with ChatGPT or keep a portable project snapshot.</span></div>
+    <div class="export-actions">
+      <button type="button" id="exportJson">JSON</button>
+      <button type="button" id="exportMarkdown">Markdown</button>
+      <button type="button" id="exportCsv">CSV</button>
+      <button type="button" id="exportDeveloperGuide">Developer Guide</button>
+      <button type="button" id="exportCompatibilityGuide">Compatibility Guide</button>
+      <button type="button" id="exportRecommendations">Recommendations</button>
+      <button type="button" id="exportAgentPrompt">AI Agent Prompt</button>
+    </div>
+  </section>
+  <section id="results"></section>
+</main>
+<script type="module" src="app.js"></script>
+</body>
+</html>
